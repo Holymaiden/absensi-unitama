@@ -189,7 +189,6 @@ active
                     });
                 },
                 error: function(data) {
-                    getData(title)
                     iziToast.error({
                         title: 'Failed.',
                         message: 'Create it data!',

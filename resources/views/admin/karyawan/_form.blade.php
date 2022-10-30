@@ -34,10 +34,16 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
+                            <label>Jurusan</label>
+                            <input type="text" class="form-control" name="jurusan" id="jurusan" required />
+                        </div>
+                        <div class="form-group col-md-6">
                             <label>No Telp</label>
                             <input type="text" class="form-control" name="notelp" id="notelp" required />
                         </div>
-                        <div class="form-group col-md-6">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
                             <label>Password</label>
                             <input type="password" class="form-control" name="password" id="" required />
                         </div>
@@ -110,6 +116,7 @@
                 $('#nama_staf').val(data.nama_staf);
                 $('#jabatan').val(data.jabatan);
                 $('#golongan').val(data.golongan);
+                $('#jurusan').val(data.jurusan);
                 $('#notelp').val(data.notelp);
                 $('#role_id').val(data.role_id).trigger('change');
                 $('#active').val(data.active).trigger('change');
