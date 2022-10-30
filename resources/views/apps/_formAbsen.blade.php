@@ -167,9 +167,13 @@
     let map, infoWindow;
 
     // Unitama Location
+    // const myLatLng = {
+    //     lat: -5.1416248,
+    //     lng: 119.4848931
+    // };
     const myLatLng = {
-        lat: -5.1416248,
-        lng: 119.4848931
+        lat: -5.1384705,
+        lng: 119.4844017
     };
 
     function initMap() {
@@ -207,7 +211,7 @@
         };
 
         if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(
+            navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const pos = {
                         lat: position.coords.latitude,
