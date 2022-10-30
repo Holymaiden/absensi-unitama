@@ -111,13 +111,19 @@ class HomeController extends Controller
                 $request['tanggal'] = Carbon::now()->format('Y-m-d');
                 $request['jam_masuk'] = Carbon::now()->format('H:i:s');
                 $data = $this->kehadiranContract->store($request);
+                $data = [
+                    'code' => config('constants.HTTP.CODE.SUCCESS'),
+                    'message' => 'Berhasil Absen Masuk',
+                    'data' => [$request['jam_masuk'], $request['tanggal']]
+                ];
             } else {
                 $absen = Kehadiran::where('user_id', auth()->user()->id)->where('tanggal', date('Y-m-d'))->first();
                 $absen->jam_keluar = Carbon::now()->format('H:i:s');
                 $absen->save();
                 $data = [
                     'code' => config('constants.HTTP.CODE.SUCCESS'),
-                    'message' => 'Berhasil Absen Keluar'
+                    'message' => 'Berhasil Absen Keluar',
+                    'data' => [Carbon::now()->format('H:i:s'), $absen->tanggal]
                 ];
             }
 

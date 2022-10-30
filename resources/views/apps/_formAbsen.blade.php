@@ -277,7 +277,7 @@
                 loaddata('', "{{config('constants.PAGINATION')}}");
                 iziToast.success({
                     title: 'Successfull.',
-                    message: 'Save it data!',
+                    message: 'Tanggal : ' + data.data[1] + ' Jam : ' + data.data[0],
                     position: 'topRight',
                     timeout: 1500
                 });
