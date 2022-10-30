@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('mulai_cuti');
             $table->date('akhir_cuti');
             $table->string('alasan', 255);
-            $table->enum('status', ['pengajuan', 'diterima', 'ditolak']);
+            $table->enum('status', ['pengajuan', 'diterima', 'ditolak'])->default('pengajuan');
             $table->timestamps();
         });
     }

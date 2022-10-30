@@ -20,10 +20,10 @@ return new class extends Migration
             $table->decimal('lat', 10, 8);
             $table->decimal('long', 11, 8);
             $table->date('tanggal');
-            $table->time('jam_masuk');
-            $table->time('jam_keluar');
-            $table->string('ket', 255);
-            $table->string('surat_sakit', 255);
+            $table->time('jam_masuk')->nullable();
+            $table->time('jam_keluar')->nullable();
+            $table->string('ket', 255)->nullable();
+            $table->string('surat_sakit', 255)->nullable();
             $table->timestamps();
         });
     }
