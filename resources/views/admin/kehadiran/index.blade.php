@@ -27,9 +27,16 @@ active
                 <div class="card">
                     <div class="card-header">
                         <h4></h4>
-                        <!-- <div class="card-header-form">
-                            {!! Helper::btn_create($title) !!}
-                        </div> -->
+                        <div class="card-header-form">
+                            <a href="{{ route('kehadiran.exportExcel') }}" class="">
+                                <button class="btn btn-success btn-rounded btn-sm">
+                                    <span class="btn-label">
+                                        <i class="fa fa-archive"></i>
+                                    </span>
+                                    Export Excel
+                                </button>
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body">
 

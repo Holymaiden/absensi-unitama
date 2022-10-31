@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\Contracts\UserContract;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\KaryawanExport;
 
 class KaryawanController extends Controller
 {
@@ -105,10 +103,5 @@ class KaryawanController extends Controller
             $this->response['message'] = $e->getMessage() . ' in file :' . $e->getFile() . ' line: ' . $e->getLine();
             return view('errors.message', ['message' => $this->response]);
         }
-    }
-
-    public function exportExcel()
-    {
-        return Excel::download(new KaryawanExport, 'karyawan.xlsx');
     }
 }

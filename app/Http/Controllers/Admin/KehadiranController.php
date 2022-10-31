@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Kehadiran;
 use Illuminate\Http\Request;
 use App\Services\Contracts\KehadiranContract;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\KaryawanExport;
 
 class KehadiranController extends Controller
 {
@@ -101,5 +103,10 @@ class KehadiranController extends Controller
             $this->response['message'] = $e->getMessage() . ' in file :' . $e->getFile() . ' line: ' . $e->getLine();
             return view('errors.message', ['message' => $this->response]);
         }
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new KaryawanExport, 'karyawan.xlsx');
     }
 }
