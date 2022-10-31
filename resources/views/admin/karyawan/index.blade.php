@@ -28,6 +28,14 @@ active
                     <div class="card-header">
                         <h4></h4>
                         <div class="card-header-form">
+                            <a href="{{ route('karyawan.exportExcel') }}" class="mr-3">
+                                <button class="btn btn-success btn-rounded btn-sm">
+                                    <span class="btn-label">
+                                        <i class="fa fa-archive"></i>
+                                    </span>
+                                    Export Excel
+                                </button>
+                            </a>
                             {!! Helper::btn_create($title) !!}
                         </div>
                     </div>

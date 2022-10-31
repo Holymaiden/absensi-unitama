@@ -46,6 +46,7 @@ Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Admin', 'mid
             Route::get('/{id}/edit', 'KaryawanController@edit')->name('karyawan.edit');
             Route::put('/{id}', 'KaryawanController@update')->name('karyawan.update');
             Route::delete('/{id}', 'KaryawanController@destroy')->name('karyawan.delete');
+            Route::get('/export/excel', 'KaryawanController@exportExcel')->name('karyawan.exportExcel');
         });
 
         Route::group(['prefix' => '/kehadiran'], function () {
