@@ -226,4 +226,21 @@ class Helper
         $cuti = Cuti::where('id', $id)->where('status', 'diterima')->first();
         return Carbon::parse($cuti->akhir_cuti)->diffInDays(Carbon::parse($cuti->mulai_cuti));
     }
+
+    public static function getDistance($lat, $lng)
+    {
+        $myLatLng = [
+            -5.1416248, 119.4848931
+        ];
+
+        $r = 6371000; // radius of the earth in km
+        $lat = $lat * (pi() / 180);
+        $myLatLng[0] = $myLatLng[0] * (pi() / 180);
+        $lat_dif = $myLatLng[0] - $lat;
+        $lng_dif = ($myLatLng[1] - $lng) * (pi() / 180);
+        $a = pow(sin($lat_dif / 2), 2) + cos($lat) * cos($myLatLng[0]) * pow(sin($lng_dif / 2), 2);
+        $d = 2 * $r * asin(sqrt($a));
+
+        return $d;
+    }
 }

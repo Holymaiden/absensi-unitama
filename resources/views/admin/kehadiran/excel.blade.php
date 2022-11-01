@@ -8,6 +8,7 @@
             <th>Jam Keluar</th>
             <th>Keterangan</th>
             <th>Status</th>
+            <th>Tempat</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
             <td>{{ $v->jam_keluar }}</td>
             <td>{{ $v->ket }}</td>
             <td>{{ $v->status }}</td>
+            <th>{{ Helper::getDistance($v->lat,$v->long) >= 50 ? 'Diluar Kampus' : 'Didalam Kampus' }}</th>
         </tr>
         @endforeach
     </tbody>

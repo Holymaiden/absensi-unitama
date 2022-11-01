@@ -53,7 +53,9 @@ active
                                         <th>Jam Masuk</th>
                                         <th>Jam Keluar</th>
                                         <th>Ket</th>
+                                        <th>Tempat</th>
                                         <th>Surat Sakit</th>
+                                        <th>Riwayat Posisi</th>
                                         <th width="12%">Aksi</th>
                                     </tr>
                                 </thead>
@@ -81,6 +83,7 @@ active
 </section>
 
 @include('admin.'.$title.'._form')
+@include('admin.'.$title.'._formAbsen')
 
 @endsection
 
