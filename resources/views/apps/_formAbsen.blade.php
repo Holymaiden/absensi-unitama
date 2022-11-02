@@ -28,6 +28,10 @@
                                 <span class="selectgroup-button">Sehat</span>
                             </label>
                             <label class="selectgroup-item">
+                                <input id="kondisi" type="radio" name="status" value="Izin" class="selectgroup-input">
+                                <span class="selectgroup-button">Izin</span>
+                            </label>
+                            <label class="selectgroup-item">
                                 <input id="kondisi" type="radio" name="status" value="Sakit" class="selectgroup-input">
                                 <span class="selectgroup-button">Sakit</span>
                             </label>
@@ -48,7 +52,8 @@
                 </div>
                 <div class="modal-footer bg-whitesmoke br">
                     <button type="button" class="btn btn-danger mr-2" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-warning mr-2" id="sakitBtn" value="izin">Izin</button>
+                    <button type="submit" class="btn btn-warning mr-2" id="sakitBtn" value="sakit">Sakit</button>
+                    <button type="submit" class="btn btn-warning mr-2" id="izinBtn" value="izin">Izin</button>
                     <button type="submit" class="btn btn-success" id="saveBtn2" value="create">Absen</button>
                 </div>
             </form>
@@ -155,10 +160,17 @@
             $("#form-surat-sakit").show();
             $("#sakitBtn").show();
             $("#saveBtn2").hide();
-        } else {
+            $("#izinBtn").hide();
+        } else if ($(this).val() == "Hadir") {
             $("#form-surat-sakit").hide();
             $("#sakitBtn").hide();
             $("#saveBtn2").show();
+            $("#izinBtn").hide();
+        } else {
+            $("#form-surat-sakit").hide();
+            $("#sakitBtn").hide();
+            $("#saveBtn2").hide();
+            $("#izinBtn").show();
         }
     });
 
@@ -265,6 +277,38 @@
     };
 
     $('#saveBtn2').click(function(e) {
+        e.preventDefault();
+        $.ajax({
+            data: $('#formInput2').serialize(),
+            url: "{{route('home.absensi')}}",
+            type: "POST",
+            dataType: 'json',
+            success: function(data) {
+                $('#formInput2').trigger("reset");
+                $('#ajaxModel2').modal('hide');
+                loaddata('', "{{config('constants.PAGINATION')}}");
+                iziToast.success({
+                    title: 'Successfull.',
+                    message: 'Tanggal : ' + data.data[1] + ' Jam : ' + data.data[0],
+                    position: 'topRight',
+                    timeout: 1500
+                });
+            },
+            error: function(data) {
+                console.log('Error:', data);
+                $('#formInput2').trigger("reset");
+                $('#ajaxModel2').modal('hide');
+                iziToast.error({
+                    title: 'Failed,',
+                    message: 'Save it data!',
+                    position: 'topRight',
+                    timeout: 1500
+                });
+            }
+        });
+    });
+
+    $('#izinBtn').click(function(e) {
         e.preventDefault();
         $.ajax({
             data: $('#formInput2').serialize(),
