@@ -71,7 +71,7 @@ active
                         <h4>Total Cuti Hari Ini</h4>
                     </div>
                     <div class="card-body">
-                        {!! Helper::get_data('cutis')->where('created_at', '>=', Carbon::today())->count() !!}
+                        {!! Helper::get_data('cutis')->where(Carbon::today(), '>=', 'created_at')->where('status','diterima')->count() !!}
                     </div>
                 </div>
             </div>
