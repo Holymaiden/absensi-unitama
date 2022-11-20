@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-row" id="form-surat-sakit">
                         <div class="form-group col-md-12">
-                            <label>Surat Sakit</label>
+                            <label id="title_dokument"></label>
                             <input type="file" class="form-control" name="surat_sakit" id="surat_sakit" required />
                         </div>
                     </div>
@@ -163,17 +163,19 @@
             $("#saveBtn2").hide();
             $("#izinBtn").hide();
             $("#alasannya").show();
+            $("#title_dokument").text("Surat Sakit");
         } else if ($(this).val() == "Hadir") {
             $("#form-surat-sakit").hide();
             $("#sakitBtn").hide();
             $("#saveBtn2").show();
             $("#izinBtn").hide();
         } else {
-            $("#form-surat-sakit").hide();
+            $("#form-surat-sakit").show();
             $("#sakitBtn").hide();
             $("#saveBtn2").hide();
             $("#izinBtn").show();
             $("#alasannya").show();
+            $("#title_dokument").text("Bukti Validasi");
         }
     });
 
@@ -313,31 +315,33 @@
 
     $('#izinBtn').click(function(e) {
         e.preventDefault();
+        let formData = new FormData(formInput2);
+        formData.append('surat_sakit', surat_sakit);
         $.ajax({
-            data: $('#formInput2').serialize(),
-            url: "{{route('home.absensi')}}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: urlx + "/izin",
+            data: formData,
             type: "POST",
             dataType: 'json',
+            processData: false,
+            contentType: false,
             success: function(data) {
                 $('#formInput2').trigger("reset");
                 $('#ajaxModel2').modal('hide');
-                loaddata('', "{{config('constants.PAGINATION')}}");
+                loadpage('', "{{ config('constants.PAGINATION') }}");
                 iziToast.success({
                     title: 'Successfull.',
-                    message: 'Tanggal : ' + data.data[1] + ' Jam : ' + data.data[0],
-                    position: 'topRight',
-                    timeout: 1500
+                    message: 'Create it data!',
+                    position: 'topRight'
                 });
             },
             error: function(data) {
-                console.log('Error:', data);
-                $('#formInput2').trigger("reset");
-                $('#ajaxModel2').modal('hide');
                 iziToast.error({
-                    title: 'Failed,',
-                    message: 'Save it data!',
-                    position: 'topRight',
-                    timeout: 1500
+                    title: 'Failed.',
+                    message: 'Create it data!',
+                    position: 'topRight'
                 });
             }
         });

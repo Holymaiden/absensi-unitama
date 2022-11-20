@@ -134,6 +134,37 @@ class HomeController extends Controller
         }
     }
 
+    public function izin(Request $request)
+    {
+        try {
+            if (Helper::getKehadiranHariIni() == 0) {
+                $request['user_id'] = auth()->user()->id;
+                $request['tanggal'] = Carbon::now()->format('Y-m-d');
+                $request['jam_masuk'] = Carbon::now()->format('H:i:s');
+                $data = $this->kehadiranContract->store($request);
+                $data = [
+                    'code' => config('constants.HTTP.CODE.SUCCESS'),
+                    'message' => 'Berhasil Absen Masuk',
+                    'data' => [$request['jam_masuk'], $request['tanggal']]
+                ];
+            } else {
+                $absen = Kehadiran::where('user_id', auth()->user()->id)->where('tanggal', date('Y-m-d'))->first();
+                $absen->jam_keluar = Carbon::now()->format('H:i:s');
+                $absen->surat_sakit = $this->kehadiranContract->izinSakitUpdate($request);
+                $absen->save();
+                $data = [
+                    'code' => config('constants.HTTP.CODE.SUCCESS'),
+                    'message' => 'Berhasil Absen Keluar',
+                    'data' => [Carbon::now()->format('H:i:s'), $absen->tanggal]
+                ];
+            }
+
+            return response()->json($data);
+        } catch (\Exception $e) {
+            $this->response['message'] = $e->getMessage() . ' in file :' . $e->getFile() . ' line: ' . $e->getLine();
+            return view('errors.message', ['message' => $this->response]);
+        }
+    }
 
     public function izinSakit(Request $request)
     {

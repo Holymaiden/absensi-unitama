@@ -79,7 +79,7 @@
                                     <th>Jam Keluar</th>
                                     <th>Keterangan</th>
                                     <th>Status</th>
-                                    <th>Surat Sakit</th>
+                                    <th>Dokument</th>
                                 </tr>
                             </thead>
                             <tbody class="datatabel">

@@ -32,6 +32,7 @@ class KehadiranService implements KehadiranContract
     public function store($request)
     {
         $input = $request->all();
+        $input['surat_sakit'] = $this->izinSakitUpdate($request);
         return $this->contractRepo->store($input);
     }
 
