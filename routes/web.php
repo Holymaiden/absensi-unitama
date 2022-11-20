@@ -22,6 +22,7 @@ Route::group(['prefix' => '',  'namespace' => 'App\Http\Controllers\Apps',  'mid
     Route::post('/pengajuanCuti', 'HomeController@pengajuanCuti')->name('home.pengajuanCuti');
     Route::post('/abseni', 'HomeController@absensi')->name('home.absensi');
     Route::post('/izinSakit', 'HomeController@izinSakit')->name('home.izinSakit');
+    Route::get('/validateSunday', 'HomeController@validateSunday')->name('home.validateSunday');
 });
 
 // Route Admin

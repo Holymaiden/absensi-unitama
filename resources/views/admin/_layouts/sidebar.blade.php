@@ -15,13 +15,14 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-
+            @if (Auth::user()->role->role_name != 'pimpinan')
             <li class="@stack('karyawan')">
                 <a class="nav-link" href="{{ route('karyawan') }}">
                     <i class="fas fa-fire"></i>
                     <span>Karyawan</span>
                 </a>
             </li>
+            @endif
             <li class="@stack('kehadiran')">
                 <a class="nav-link" href="{{ route('kehadiran') }}">
                     <i class="fas fa-fire"></i>

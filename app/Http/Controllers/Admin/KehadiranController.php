@@ -40,9 +40,11 @@ class KehadiranController extends Controller
         try {
             $title = $this->title;
             $jml = $request->jml == '' ? config('constants.PAGINATION') : $request->jml;
-            $data = Kehadiran::when($request->input('cari'), function ($query) use ($request) {
-                $query->where('status', 'like', "%{$request->input('cari')}%")
-                    ->orWhere("jam_masuk", "like", "%{$request->input('cari')}%")
+            $status = $request->status == '' ? 'is not null' : '="' . $request->status . '"';
+            $date = $request->date == '' ? 'is not null' : '>="' . $request->date . '"';
+            $date2 = $request->date2 == '' ? 'is not null' : '<="' . $request->date2 . '"';
+            $data = Kehadiran::whereRaw('status ' . $status)->whereRaw('tanggal ' . $date)->whereRaw('tanggal ' . $date2)->when($request->input('cari'), function ($query) use ($request) {
+                $query->rWhere("jam_masuk", "like", "%{$request->input('cari')}%")
                     ->orWhere("jam_keluar", "like", "%{$request->input('cari')}%");
             })
                 ->orderBy('id', 'desc')

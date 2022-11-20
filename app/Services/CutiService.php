@@ -45,8 +45,13 @@ class CutiService implements CutiContract
      */
     public function update($request, $id)
     {
-        $input['status'] = $request['status'];
-        return $this->contractRepo->update($input, $id);
+        if ($request->has('status')) {
+            return Cuti::where('id', $id)->update(['status' => $request->status]);
+        } else {
+            return Cuti::where('id', $id)->update(['status2' => $request->status2]);
+        }
+
+        // return $this->contractRepo->update($input, $id);
     }
 
     /**

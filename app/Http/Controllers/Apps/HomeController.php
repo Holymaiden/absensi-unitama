@@ -161,4 +161,15 @@ class HomeController extends Controller
             return view('errors.message', ['message' => $this->response]);
         }
     }
+
+    public function validateSunday(Request $request)
+    {
+        try {
+            $data = Helper::validateSunday($request->date);
+            return response()->json($data);
+        } catch (\Exception $e) {
+            $this->response['message'] = $e->getMessage() . ' in file :' . $e->getFile() . ' line: ' . $e->getLine();
+            return view('errors.message', ['message' => $this->response]);
+        }
+    }
 }

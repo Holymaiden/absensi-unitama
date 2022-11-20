@@ -20,11 +20,11 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Mulai Cuti</label>
-                            <input type="text" class="form-control datepicker" name="mulai_cuti" value="" id="mulai_cuti">
+                            <input type="text" class="form-control datepicker" value="2022-11-01" name="mulai_cuti" id="mulai_cuti">
                         </div>
                         <div class="form-group col-md-6">
                             <label>Akhir Cuti</label>
-                            <input type="text" class="form-control datepicker" name="akhir_cuti" value="" id="akhir_cuti">
+                            <input type="text" class="form-control datepicker" value="2022-11-01" name="akhir_cuti" id="akhir_cuti">
                         </div>
                     </div>
                     <div class="form-row">
@@ -45,6 +45,7 @@
 
 @push('jsScriptAjax')
 <script type="text/javascript">
+
     function cutiForm() {
         $('#formInput').trigger("reset");
         $("#headForm").empty();
@@ -54,5 +55,79 @@
         $('#ajaxModel').modal('show');
         $('#_method').val('POST');
     }
+
+    $("#mulai_cuti").on("change", function() {
+        var mulai_cuti = $(this).val();
+        var akhir_cuti = $("#akhir_cuti").val();
+        if (akhir_cuti != '') {
+            if (mulai_cuti > akhir_cuti) {
+                iziToast.error({
+                    title: 'Failed,',
+                    message: 'Tanggal Mulai Cuti Tidak Boleh Lebih Besar Dari Tanggal Akhir Cuti!',
+                    position: 'topRight',
+                    timeout: 1500
+                });
+                $("#mulai_cuti").val('');
+            }
+        }
+
+        $.ajax({
+            url: urlx + '/validateSunday',
+            data: {
+                "date": mulai_cuti,
+            },
+            type: "GET",
+            datatype: "json",
+            success: function(response) {
+                console.log(response);
+                if (response == true) {
+                    iziToast.error({
+                        title: 'Failed,',
+                        message: 'Tidak Boleh Cuti Hari Minggu!',
+                        position: 'topRight',
+                        timeout: 1500
+                    });
+                    $("#mulai_cuti").val('');
+                }
+
+            }
+        })
+    });
+
+    $("#akhir_cuti").on("change", function() {
+        var akhir_cuti = $(this).val();
+        var mulai_cuti = $("#mulai_cuti").val();
+        if (mulai_cuti != '') {
+            if (mulai_cuti > akhir_cuti) {
+                iziToast.error({
+                    title: 'Failed,',
+                    message: 'Tanggal Akhir Cuti Tidak Boleh Lebih Kecil Dari Tanggal Mulai Cuti!',
+                    position: 'topRight',
+                    timeout: 1500
+                });
+                $("#akhir_cuti").val('');
+            }
+        }
+
+        $.ajax({
+            url: urlx + '/validateSunday',
+            data: {
+                "date": akhir_cuti,
+            },
+            type: "GET",
+            datatype: "json",
+            success: function(response) {
+                if (response == true) {
+                    iziToast.error({
+                        title: 'Failed,',
+                        message: 'Tidak Boleh Cuti Hari Minggu!',
+                        position: 'topRight',
+                        timeout: 1500
+                    });
+                    $("#akhir_cuti").val('');
+                }
+            }
+        })
+    });
 </script>
 @endpush

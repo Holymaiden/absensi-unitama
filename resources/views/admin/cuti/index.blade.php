@@ -81,6 +81,7 @@ active
 <script type="text/javascript">
     $(document).ready(function() {
         let urlx = "{{ $title }}";
+        let role = "{{ Auth::user()->role->role_name }}";
         $("#pilihan").on('change', function(event) {
             let pilih = $('#pilihan').val();
             if (pilih == '0') {
@@ -254,33 +255,62 @@ active
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        $.ajax({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            type: "PUT",
-                            url: urlx + '/' + id,
-                            data: {
-                                "status": 'diterima'
-                            },
-                            success: function(data) {
-                                loadpage('', "{{ config('constants.PAGINATION') }}")
-                                iziToast.success({
-                                    title: 'Successfull.',
-                                    message: 'Delete it data!',
-                                    position: 'topRight',
-                                    timeout: 1500
-                                });
-                            },
-                            error: function(data) {
-                                iziToast.error({
-                                    title: 'Failed,',
-                                    message: 'Delete it data!',
-                                    position: 'topRight',
-                                    timeout: 1500
-                                });
-                            }
-                        });
+                        if (role == "admin")
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                type: "PUT",
+                                url: urlx + '/' + id,
+                                data: {
+                                    "status": 'diterima'
+                                },
+                                success: function(data) {
+                                    loadpage('', "{{ config('constants.PAGINATION') }}")
+                                    iziToast.success({
+                                        title: 'Successfull.',
+                                        message: 'Delete it data!',
+                                        position: 'topRight',
+                                        timeout: 1500
+                                    });
+                                },
+                                error: function(data) {
+                                    iziToast.error({
+                                        title: 'Failed,',
+                                        message: 'Delete it data!',
+                                        position: 'topRight',
+                                        timeout: 1500
+                                    });
+                                }
+                            });
+                        else
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                type: "PUT",
+                                url: urlx + '/' + id,
+                                data: {
+                                    "status2": 'diterima'
+                                },
+                                success: function(data) {
+                                    loadpage('', "{{ config('constants.PAGINATION') }}")
+                                    iziToast.success({
+                                        title: 'Successfull.',
+                                        message: 'Delete it data!',
+                                        position: 'topRight',
+                                        timeout: 1500
+                                    });
+                                },
+                                error: function(data) {
+                                    iziToast.error({
+                                        title: 'Failed,',
+                                        message: 'Delete it data!',
+                                        position: 'topRight',
+                                        timeout: 1500
+                                    });
+                                }
+                            });
                     } else {
                         swal.close();
                     }
@@ -308,33 +338,62 @@ active
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        $.ajax({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            type: "PUT",
-                            data: {
-                                "status": 'ditolak'
-                            },
-                            url: urlx + '/' + id,
-                            success: function(data) {
-                                loadpage('', "{{ config('constants.PAGINATION') }}")
-                                iziToast.success({
-                                    title: 'Successfull.',
-                                    message: 'Delete it data!',
-                                    position: 'topRight',
-                                    timeout: 1500
-                                });
-                            },
-                            error: function(data) {
-                                iziToast.error({
-                                    title: 'Failed,',
-                                    message: 'Delete it data!',
-                                    position: 'topRight',
-                                    timeout: 1500
-                                });
-                            }
-                        });
+                        if (role == "admin")
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                type: "PUT",
+                                data: {
+                                    "status": 'ditolak'
+                                },
+                                url: urlx + '/' + id,
+                                success: function(data) {
+                                    loadpage('', "{{ config('constants.PAGINATION') }}")
+                                    iziToast.success({
+                                        title: 'Successfull.',
+                                        message: 'Delete it data!',
+                                        position: 'topRight',
+                                        timeout: 1500
+                                    });
+                                },
+                                error: function(data) {
+                                    iziToast.error({
+                                        title: 'Failed,',
+                                        message: 'Delete it data!',
+                                        position: 'topRight',
+                                        timeout: 1500
+                                    });
+                                }
+                            });
+                        else
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                type: "PUT",
+                                data: {
+                                    "status2": 'ditolak'
+                                },
+                                url: urlx + '/' + id,
+                                success: function(data) {
+                                    loadpage('', "{{ config('constants.PAGINATION') }}")
+                                    iziToast.success({
+                                        title: 'Successfull.',
+                                        message: 'Delete it data!',
+                                        position: 'topRight',
+                                        timeout: 1500
+                                    });
+                                },
+                                error: function(data) {
+                                    iziToast.error({
+                                        title: 'Failed,',
+                                        message: 'Delete it data!',
+                                        position: 'topRight',
+                                        timeout: 1500
+                                    });
+                                }
+                            });
                     } else {
                         swal.close();
                     }

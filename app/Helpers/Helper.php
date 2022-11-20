@@ -243,4 +243,14 @@ class Helper
 
         return $d;
     }
+
+    public static function validateSunday($date)
+    {
+        $day = date('D', strtotime($date));
+        if ($day == 'Sun') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ url('stisla') }}/node_modules/bootstrap-daterangepicker/daterangepicker.css">
 <link rel="stylesheet" href="{{ url('stisla') }}/node_modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
 <link rel="stylesheet" href="{{ url('stisla') }}/node_modules/select2/dist/css/select2.min.css">
-<link rel="stylesheet" href="{{ url('stisla') }}/node_modules/selectric/public/selectric.css">
+<link rel="stylesheet" href="{{ url('') }}/public/stisla/node_modules/selectric/public/selectric.css">
 <link rel="stylesheet" href="{{ url('stisla') }}/node_modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
 <link rel="stylesheet" href="{{ url('stisla') }}/node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
 <link rel="stylesheet" href="{{ url('stisla') }}/node_modules/chocolat/dist/css/chocolat.css">

@@ -73,9 +73,10 @@
         $('#_method2').val('POST');
         $("#form-surat-sakit").hide();
         $("#sakitBtn").hide();
+        $("#izinBtn").hide();
+        $("#alasannya").hide();
     }
-</script>
-<script type="text/javascript">
+
     let urlx = "";
     $("#pilihan").on('change', function(event) {
         let pilih = $('#pilihan').val();
@@ -161,6 +162,7 @@
             $("#sakitBtn").show();
             $("#saveBtn2").hide();
             $("#izinBtn").hide();
+            $("#alasannya").show();
         } else if ($(this).val() == "Hadir") {
             $("#form-surat-sakit").hide();
             $("#sakitBtn").hide();
@@ -171,6 +173,7 @@
             $("#sakitBtn").hide();
             $("#saveBtn2").hide();
             $("#izinBtn").show();
+            $("#alasannya").show();
         }
     });
 
