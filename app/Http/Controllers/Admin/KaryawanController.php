@@ -35,7 +35,7 @@ class KaryawanController extends Controller
 
     public function data(Request $request)
     {
-        $jml = $request->jml == '' ? config('constants.PAGINATION') : $request->jml;
+        $jml = $request->jml == '' ? 5 : $request->jml;
         $title = $this->title;
         $data = User::when($request->input('cari'), function ($query) use ($request) {
             $query->where('name', 'like', "%{$request->input('cari')}%")

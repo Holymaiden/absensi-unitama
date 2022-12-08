@@ -93,7 +93,7 @@ active
                 $('#option').hide();
             }
         });
-        loadpage('', "{{ config('constants.PAGINATION') }}");
+        loadpage('', "{{config('constants.PAGINATION')}}");
         var $pagination = $('.twbs-pagination');
         var defaultOpts = {
             totalPages: 1,
@@ -162,6 +162,13 @@ active
                 }
             });
         }
+
+        $("#pencarian, #jumlah").on('keyup change', function(event) {
+            let cari = $('#pencarian').val();
+            let jml = $('#jumlah').val();
+            loadpage(cari, jml);
+        });
+
         // proses simpan
         $('#saveBtn').click(function(e) {
             $('input:checkbox').removeAttr('checked');
